@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block content %}
+<!-- About -->
+<section class="content-section bg-light border-radius" style="padding-top: 3.5rem; padding-bottom: 3.5rem;" id="about">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h2>{{ markdown|length }} words MarkDown Here</h2>
+                <p class="lead mb-5">
+                <pre id="ba" class="mb-1 text-left copy">{{ markdown }}</pre>
+                <br>
+                <button type="button" data-complete-text="Copy finished" class="btn btn-dark btn-xl" id="btn1" data-clipboard-text="{{ markdown }}">
+                    Copy to clipboard
+                </button>
+                <script>
+                    var clipboard = new ClipboardJS('.btn');
+                    $(function() {
+                        $("#btn1").click(function(){
+                            $(this).button('loading').delay(1000).queue(function() {
+                                $(this).button('complete');
+                            });
+                        });
+                    });
+                </script>
+                <script type="text/javascript" color="165,222,228" opacity='0.8' zIndex="-2" count="99" src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

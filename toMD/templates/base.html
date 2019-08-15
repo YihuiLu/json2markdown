@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="fancy markdown convert page">
+    <meta name="author" content="fancy">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+    <title>MarkDown Generator</title>
+
+    <link rel="icon" href="static/favicon.ico" type="image/x-icon"/>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+          rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css') }}"
+          rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/stylish-portfolio.min.css') }}" rel="stylesheet">
+
+
+    <script src="static/js/script.js"></script>
+
+    {% from 'bootstrap/form.html' import render_form %}
+    <script>
+        $('#toMD-MDForm').each(function () {
+            this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+        }).on('input', function () {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+    </script>
+</head>
+
+<body id="page-top" background="https://cloudydaytech.files.wordpress.com/2018/05/screenshot.jpg">
+
+<!-- Header -->
+<div class="row">
+    <div class="container text-center my-auto">
+        <h1 class="mb-1">
+            <br>
+            <p style="color:#BDC0BA;font-size:60px;">
+                Markdown Documentation Generator
+            </p>
+            <br>
+        </h1>
+    </div>
+</div>
+<div class="container-fluid" id="main">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <div class="toMD-MDForm">
+                <form method="post">
+                    {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="col col-lg-12">
+                            <div class="form-group">
+                                {{ form.des(class="form-control", placeholder="Function Description Here") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-6">
+                            <div class="form-group">
+                                {{ form.ultra(class="form-control", placeholder="Extra Arg  Names (split by ',')") }}
+                            </div>
+                        </div>
+                        <div class="col col-lg-6">
+                            <div class="form-group">
+                                {{ form.args(class="form-control", placeholder="Extra Arg Default Values (split by ',')") }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.packets(class="form-control",id="text",rows="15",placeholder="输入json/Python的dict") }}
+
+                        {#                            <script>$("#text").txtaAutoHeight();</script>#}
+                        <!-- 自动高度-->
+                    </div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div>
+                                <p style="color: white">{{ messages[0][1] }}</p>
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    <a href="#about">
+                        {{ form.submit(class="btn btn-dark btn-xl") }}
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn  btn-link float-right">
+                        <strong>清 空</strong>
+                    </a>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <script>
+        $('#main').children().css({'opacity': 0.8}).end().css({'opacity': 0.9});
+    </script>
+</div>
+
+<!-- Footer -->
+<footer class="footer text-center">
+    {% block footer %}{% endblock %}
+    <div class="container">
+        <p class="text-muted small mb-0">Copyright &copy; CityDNA 2019</p>
+    </div>
+
+</footer>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{{ url_for('static', filename='js/stylish-portfolio.min.js') }}"></script>
+
+</body>
+
+</html>
