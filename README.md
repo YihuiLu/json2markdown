@@ -1,14 +1,37 @@
-# 接口文档生成工具
+# json转Markdown工具（用于快速生成接口文档）
 
-### Author: 卢毅飞、张猛、陈韵博
+> ### 项目地址：
 
-将接口的Request和Response文件转化CityDNA内部文档格式
+> 此工具可将json格式数据转换为Markdown表格数据，或输出“flask_docs”格式的接口文档，节省开发人员时间，提升效率
+
+## 示例：
+
+<img src="./img/Kapture 2019-08-15 at 11.00.19 (2).gif">
+
+----
+
+ **若输入一个请求json和一个响应json则可以输出完整的接口文档**
+
+## 示例：
+
+<img src="img/Kapture 2019-08-15 at 14.46.47.gif">
+
+----
+
+**或者可以输入API BluePrint**
+
+## 示例：
+
+
+<img src="img/Kapture 2019-08-15 at 15.03.59.gif">
+
+
+----
 
 ## 使用说明
+                           
 
-<img src="./Instruction Pic.png"/>
-
-请尽量按照如下格式输入
+程序接收以下类型参数：
 
 Sample API Blueprint Format:
 ```http
@@ -46,8 +69,15 @@ Sample Request/Response Format:
 }
 ```
 
----
-#### 7.24 更新
-* 添加了原先一个JSON生成Markdown表格的功能
-* 左面第二行的两个Textfield都是原先这个功能的两个额外参数域，用逗号分隔
-* 只在输入单独1个JSON object的时候有效。输入API Blueprint或者两个(Request/reponse)JSON的时候无效
+Sample json Format:
+```json
+{
+    "proposal_list" :[{"id":"146","approve":"1"}]
+}
+```
+
+**并且接收自定义参数**
+
+<img src="img/1565853623059.jpg">
+
+

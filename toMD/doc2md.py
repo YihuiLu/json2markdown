@@ -234,6 +234,11 @@ class MDConvertor:
     def gimmeThat(self, description, args, ultra):
         if self.error_flag:
             return self.error_msg
+        # 预处理null, false, true情况
+        for i in range(len(self.extracted_jsons)):
+            self.extracted_jsons[i] = re.sub(r':[ ]*false', ': False', self.extracted_jsons[i])
+            self.extracted_jsons[i] = re.sub(r':[ ]*true', ': True', self.extracted_jsons[i])
+            self.extracted_jsons[i] = re.sub(r'(?i):[ ]*null', ': "NULL"', self.extracted_jsons[i])
         # 先处理只有一个JSON的情况
         if self.one_json:
             try:
@@ -244,11 +249,6 @@ class MDConvertor:
                 return self.error_msg
             md = JsonToMDTable(jsonified, args, ultra)
             return md.core()
-        # 预处理null, false, true情况
-        for i in range(2):
-            self.extracted_jsons[i] = re.sub(r':[ ]*false', ': False', self.extracted_jsons[i])
-            self.extracted_jsons[i] = re.sub(r':[ ]*true', ': True', self.extracted_jsons[i])
-            self.extracted_jsons[i] = re.sub(r'(?i):[ ]*null', ': "NULL"', self.extracted_jsons[i])
         # 把拿到的JSON都变成MD table
         request_extra_value = ['nullable', 'remark']
         request_extra_args = ["False", ""]
