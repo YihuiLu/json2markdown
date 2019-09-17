@@ -12,13 +12,15 @@
 from flask import Flask, jsonify, Blueprint
 from flask_bootstrap import Bootstrap
 from flask_docs import ApiDoc
-from toMD import views, errors
+
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 bootstrap = Bootstrap(app)
+
+from toMD import views, errors
 
 # Local loading
 # app.config['API_DOC_CDN'] = False
