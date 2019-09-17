@@ -12,6 +12,7 @@
 from flask import Flask, jsonify, Blueprint
 from flask_bootstrap import Bootstrap
 from flask_docs import ApiDoc
+from . import views, errors
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
@@ -85,7 +86,7 @@ def get_markdown():
     return jsonify({'api': 'add data'})
 
 
-from toMD import views, errors
+
 
 
 
